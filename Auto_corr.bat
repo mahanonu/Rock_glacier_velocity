@@ -24,19 +24,19 @@ for /d %%i in ("D*") DO (
     )
     )
 ) 
-REM for /d /r %%i in ("D*") DO (
-REM     for /d %%j in ("%%i\*") DO (
-REM         mkdir %%j\Imcorr
-REM         for /d %%k in ("%%i\*") DO (
-REM             IF  %%j == %%k (
-REM                 echo Same folder
-REM             ) ELSE (
-REM                 saga_cmd grid_analysis 19 -GRID_1 %%j\rgb.sgrd -GRID_2 %%k\rgb.sgrd -DTM_1 NULL -DTM_2 NULL -CORRPOINTS %%j\Imcorr\%%~nj_%%~nk_points.shp -CORRLINES %%j\Imcorr\%%~nj_%%~nk_lines.shp -SEARCH_CHIPSIZE 3 -REF_CHIPSIZE 2 -GRID_SPACING 10
-REM             )
-REM         )
-REM     )
-REM )
-REM 
-REM for /d /r %%i in ("*") DO (
-REM     del /s %%i\*rgb*
-REM )
+for /d /r %%i in ("D*") DO (
+    for /d %%j in ("%%i\*") DO (
+        mkdir %%j\Imcorr
+        for /d %%k in ("%%i\*") DO (
+            IF  %%j == %%k (
+                echo Same folder
+            ) ELSE (
+                saga_cmd grid_analysis 19 -GRID_1 %%j\rgb.sgrd -GRID_2 %%k\rgb.sgrd -DTM_1 NULL -DTM_2 NULL -CORRPOINTS %%j\Imcorr\%%~nj_%%~nk_points.shp -CORRLINES %%j\Imcorr\%%~nj_%%~nk_lines.shp -SEARCH_CHIPSIZE 3 -REF_CHIPSIZE 2 -GRID_SPACING 10
+            )
+        )
+    )
+)
+
+for /d /r %%i in ("*") DO (
+    del /s %%i\*rgb*
+)
